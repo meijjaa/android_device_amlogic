@@ -35,17 +35,17 @@ if [ "$1" != "bootimage" ] && [ "$1" != "recoveryimage" ] && [ "$1" != "menuconf
 fi
 
 if [ "$1" == "bootimage" ]; then
-    make -f device/khadas/$TARGET_PRODUCT/Kernel.mk -j6 bootimage-quick
+    make -f device/amlogic/s912/Kernel.mk -j6 bootimage-quick
 fi
 
 if [ "$1" == "recoveryimage" ]; then
-    make -f device/khadas/$TARGET_PRODUCT/Kernel.mk -j6 recoveryimage-quick
+    make -f device/amlogic/s912/Kernel.mk -j6 recoveryimage-quick
 fi
 
 if [ "$1" == "menuconfig" ]; then
-    make -f device/khadas/$TARGET_PRODUCT/Kernel.mk kernelconfig
+    make -f device/amlogic/s912/Kernel.mk kernelconfig
 fi
 
 if [ "$1" == "savedefconfig" ]; then
-    make -i -f device/khadas/$TARGET_PRODUCT/Kernel.mk savekernelconfig
+    make -i -f device/amlogic/s912/Kernel.mk savekernelconfig
 fi

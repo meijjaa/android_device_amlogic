@@ -10,68 +10,35 @@ PRODUCT_COPY_FILES += \
 
 instaboot_rc := $(wildcard $(LOCAL_PATH)/instaboot.rc)
 ifeq ($(instaboot_rc),)
-instaboot_rc := device/khadas/common/instaboot.rc
+instaboot_rc := device/amlogic/common/instaboot.rc
 endif
 
+ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
 PRODUCT_COPY_FILES += \
     $(instaboot_rc):root/instaboot.rc
-
-#WITH_DEXPREOPT := true
-#WITH_DEXPREOPT_PIC := true
-
-PRODUCT_PACKAGES += instabootserver
-endif
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.adb.secure=1
-
-ifeq ($(TARGET_BUILD_CTS), true)
-
-ADDITIONAL_DEFAULT_PROPERTIES += ro.vold.forceencryption=1
-PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.software.voice_recognizers.xml:system/etc/permissions/android.software.voice_recognizers.xml \
-	frameworks/native/data/etc/android.hardware.screen.landscape.xml:system/etc/permissions/android.hardware.screen.landscape.xml
-
-ifeq ($(TARGET_BUILD_GOOGLE_ATV), true)
-PRODUCT_COPY_FILES += \
-    device/khadas/common/android.software.google_atv.xml:system/etc/permissions/android.software.google_atv.xml
-PRODUCT_PACKAGE_OVERLAYS += device/khadas/common/gms_overlay
-PRODUCT_PACKAGES += \
-	GooglePackageInstaller
-
-$(call add-clean-step, rm -rf $(OUT_DIR)/system/priv-app/DLNA)
-endif
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.app.rotation=original \
-	media.amplayer.widevineenable=true
-
-#WITH_DEXPREOPT := true
-#WITH_DEXPREOPT_PIC := true
-
-PRODUCT_PACKAGES += \
-    Contacts \
-    TvProvider \
-    Bluetooth \
-	PrintSpooler \
-    DownloadProviderUi \
-    Calendar \
-    QuickSearchBox
 else
-PRODUCT_PACKAGES += \
-    Dig \
-	libfwdlockengine \
-	DownloadProviderUi
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.sys.app.rotation=middle_port
-
-endif
-
-ifeq ($(TARGET_BUILD_NETFLIX), true)
 PRODUCT_COPY_FILES += \
-	device/khadas/common/droidlogic.software.netflix.xml:system/etc/permissions/droidlogic.software.netflix.xml
+    $(instaboot_rc):recovery/root/instaboot.rc
+endif
+
+#WITH_DEXPREOPT := true
+#WITH_DEXPREOPT_PIC := true
+endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.nrdp.modelgroup=P212ATV
-endif
+    ro.adb.secure=0
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.screen.landscape.xml:system/etc/permissions/android.hardware.screen.landscape.xml \
+    frameworks/native/data/etc/android.software.picture_in_picture.xml:system/etc/permissions/android.software.picture_in_picture.xml \
+    frameworks/native/data/etc/android.software.voice_recognizers.xml:system/etc/permissions/android.software.voice_recognizers.xml
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.amplayer.widevineenable=true
+
+PRODUCT_PACKAGE_OVERLAYS += device/amlogic/common/overlay
+DEVICE_PACKAGE_OVERLAYS += device/amlogic/common/overlay
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.app.rotation=middle_port
+

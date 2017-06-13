@@ -1,7 +1,9 @@
 # Set display related config
 ro.platform.has.mbxuimode=true
 ro.platform.has.realoutputmode=true
-ro.platform.keepbackground.app=com.droidlogic.PPPoE
+
+sys.display-size=3840x2160
+
 #camera max to 720p
 ro.camera.preview.MaxSize=1280x720
 ro.camera.preview.LimitedRate=1280x720x30,640x480x30,320x240x28
@@ -13,10 +15,7 @@ ro.autoconnectbt.macprefix=00:CD:FF
 ro.autoconnectbt.btclass=50c
 
 #if wifi Only
-ro.radio.noril=false
-
-#if need pppoe
-ro.net.pppoe=true
+ro.radio.noril=true
 
 #the prop is used for enable or disable
 #DD+/DD force output when HDMI EDID is not supported
@@ -92,7 +91,7 @@ mbx.hdmiin.videolayer=false
 service.adb.tcp.port=5555
 
 #netflix
-ro.nrdp.modelgroup=S905
+ro.nrdp.modelgroup=S912
 
 ######## UBOOTENV VARIBLES - r/w as system properties ##########
 #
@@ -169,3 +168,4 @@ ubootenv.var.hdmimode=
 ubootenv.var.is.bestmode=
 ubootenv.var.disp.fromleft=
 ubootenv.var.edid.crcvalue=
+ubootenv.var.colorattribute=

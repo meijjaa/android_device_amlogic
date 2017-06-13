@@ -1,4 +1,5 @@
 system_control                              u:object_r:system_control_service:s0
+hdmi_cec                                    u:object_r:hdmi_cec_service:s0
 subtitle_service                            u:object_r:subtitle_service:s0
 image.player                                u:object_r:imageserver_service:s0
 pppoe                                       u:object_r:pppoe_service:s0

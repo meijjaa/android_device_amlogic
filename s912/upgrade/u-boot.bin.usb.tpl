@@ -1,1 +1,0 @@
-../../../../uboot/fip/u-boot.bin.usb.tpl

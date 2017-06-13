@@ -47,7 +47,7 @@ key 24    O
 key 25    P
 key 26    LEFT_BRACKET
 key 27    RIGHT_BRACKET
-key 28    DPAD_CENTER
+key 28    ENTER
 key 29    CTRL_LEFT
 key 30    A
 key 31    S
@@ -139,24 +139,24 @@ key 116   POWER
 key 117   NUMPAD_EQUALS
 # key 118 "KEY_KPPLUSMINUS"
 key 119   BREAK
-# key 120 (undefined)
+key 120   APP_SWITCH
 key 121   NUMPAD_COMMA
 key 122   KANA
 key 123   EISU
 key 124   YEN
-key 125   META_LEFT
-key 126   META_RIGHT
+key 125   HOME
+key 126   HOME
 key 127   MENU
 key 128   MEDIA_STOP
 # key 129 "KEY_AGAIN"
 # key 130 "KEY_PROPS"
 # key 131 "KEY_UNDO"
 # key 132 "KEY_FRONT"
-# key 133 "KEY_COPY"
+key 133   COPY
 # key 134 "KEY_OPEN"
-# key 135 "KEY_PASTE"
+key 135   PASTE
 # key 136 "KEY_FIND"
-# key 137 "KEY_CUT"
+key 137   CUT
 # key 138 "KEY_HELP"
 key 139   MENU
 key 140   CALCULATOR
@@ -410,8 +410,6 @@ key 582   VOICE_ASSIST
 # Keys defined by HID usages
 key usage 0x0c006F BRIGHTNESS_UP
 key usage 0x0c0070 BRIGHTNESS_DOWN
-#for xiaomi bt remote
-key usage 0x07004a HOME
 
 # Joystick and game controller axes.
 # Axes that are not mapped will be assigned generic axis numbers by the input subsystem.

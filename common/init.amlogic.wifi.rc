@@ -34,3 +34,9 @@ service bcm_supplicant /system/bin/wpa_supplicant \
     socket wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
+
+service bcmdl /system/xbin/bcmdl -n /system/etc/wifi/43569/nvram_ap6269a2.nvm /system/etc/wifi/43569/fw_bcm43569a2_ag.bin.trx
+		class main
+    oneshot
+    disabled
+    seclabel u:r:bcmdl:s0

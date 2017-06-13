@@ -21,32 +21,10 @@ PRODUCT_LOCALES := en_US
 PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi
 
 PRODUCT_PACKAGES += \
-    OpenWnn \
     libWnnEngDic \
     libWnnJpnDic \
     libwnndict \
     WAPPushManager
-
-PRODUCT_PACKAGES += \
-    Galaxy4 \
-    HoloSpiralWallpaper \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    MagicSmokeWallpapers \
-    NoiseField \
-    PhaseBeam \
-    VisualizationWallpapers \
-    PhotoTable
-
-PRODUCT_PACKAGES += \
-    Camera2 \
-    Gallery2 \
-    Music \
-    MusicFX \
-    OneTimeInitializer \
-    Provision \
-    SystemUI \
-    WallpaperCropper
 
 PRODUCT_PACKAGES += \
     clatd \
@@ -65,7 +43,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     audio.primary.default \
     audio_policy.default \
-	audio.dia_remote.default \
+    audio.dia_remote.default \
     local_time.default \
     vibrator.default \
     power.default
@@ -76,31 +54,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
         frameworks/av/media/libeffects/data/audio_effects.conf:system/etc/audio_effects.conf
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.carrier=unknown
+PRODUCT_COPY_FILES += \
+        device/amlogic/common/ddr/ddr_window_64.ko:/system/lib/ddr_window_64.ko
 
-PRODUCT_PACKAGES += \
-    BasicDreams \
-    Browser \
-    CalendarProvider \
-    CaptivePortalLogin \
-    CertInstaller \
-    DeskClock \
-    DocumentsUI \
-    Exchange2 \
-    ExternalStorageProvider \
-    FusedLocation \
-    InputDevices \
-    KeyChain \
-    Keyguard \
-    LatinIME \
-    Launcher2 \
-    PacProcessor \
-    libpac \
-    ProxyHandler \
-    Settings \
-    SharedStorageBackup \
-    VpnDialogs
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.carrier=unknown \
+    net.tethering.noprovisioning=true
 
 $(call inherit-product-if-exists, frameworks/base/data/fonts/fonts.mk)
 $(call inherit-product-if-exists, external/google-fonts/dancing-script/fonts.mk)
@@ -114,6 +73,9 @@ $(call inherit-product-if-exists, frameworks/base/data/keyboards/keyboards.mk)
 $(call inherit-product-if-exists, frameworks/webview/chromium/chromium.mk)
 $(call inherit-product, build/target/product/core_base.mk)
 
+#default hardware composer version is 2.0
+TARGET_USES_HWC2 := true
+
 ifneq ($(wildcard vendor/amlogic/frameworks/av/LibPlayer),)
     WITH_LIBPLAYER_MODULE := true
 else
@@ -125,35 +87,28 @@ WITH_SOFT_AM_EXTRACTOR_DECODER := true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.render_dirty_regions=false \
+    ro.hwui.texture_cache_size=64.0f \
     camera.disable_zsl_mode=1
-
-# USB camera default face
-PRODUCT_PROPERTY_OVERRIDES += \
-    rw.camera.usb.faceback=true
 
 SKIP_BOOT_JARS_CHECK = true
 
 PRODUCT_BOOT_JARS += \
-    droidlogic \
-    droidlogic.frameworks.pppoe
+    droidlogic
 
 PRODUCT_PACKAGES += \
-    RemoteIME \
-    OTAUpgrade \
+    Miracast
+
+
+#   droidlogic-res \
+
+PRODUCT_PACKAGES += \
     droidlogic \
-    droidlogic-res \
     systemcontrol \
+    VideoPlayer \
     systemcontrol_static \
     libsystemcontrolservice \
-    VideoPlayer \
-    SubTitle \
-    FileBrowser \
-    libdig
+    BluetoothRemote
 
-ifeq ($(BUILD_WITH_GAPPS_CONFIG),false)
-PRODUCT_PACKAGES += \
-	AppInstaller
-endif
 PRODUCT_PACKAGES += \
     hostapd \
     wpa_supplicant \
@@ -212,11 +167,13 @@ PRODUCT_PACKAGES += libomx_av_core_alt \
 ifeq ($(BUILD_WITH_DM_VERITY), true)
 PRODUCT_SYSTEM_VERITY_PARTITION = /dev/block/system
 # Provides dependencies necessary for verified boot
+PRODUCT_SUPPORTS_BOOT_SIGNER := true
 PRODUCT_SUPPORTS_VERITY := true
+PRODUCT_SUPPORTS_VERITY_FEC := true
 # The dev key is used to sign boot and recovery images, and the verity
 # metadata table. Actual product deliverables will be re-signed by hand.
 # We expect this file to exist with the suffixes ".x509.pem" and ".pk8".
-PRODUCT_VERITY_SIGNING_KEY := device/khadas/common/security/verity
+PRODUCT_VERITY_SIGNING_KEY := device/amlogic/common/security/verity
 ifneq ($(TARGET_USE_SECURITY_DM_VERITY_MODE_WITH_TOOL),true)
 PRODUCT_PACKAGES += \
         verity_key.amlogic
@@ -231,15 +188,15 @@ endif
 #ifeq ($(BUILD_WITH_APP_OPTIMIZATION),true)
 
 PRODUCT_COPY_FILES += \
-    device/khadas/common/optimization/liboptimization_32.so:system/lib/liboptimization.so \
-    device/khadas/common/optimization/config:system/package_config/config
+    device/amlogic/common/optimization/liboptimization_32.so:system/lib/liboptimization.so \
+    device/amlogic/common/optimization/config:system/package_config/config
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.app.optimization=true
 
 ifeq ($(ANDROID_BUILD_TYPE), 64)
 PRODUCT_COPY_FILES += \
-    device/khadas/common/optimization/liboptimization_64.so:system/lib64/liboptimization.so
+    device/amlogic/common/optimization/liboptimization_64.so:system/lib64/liboptimization.so
 endif
 #endif
 
@@ -249,8 +206,8 @@ endif
 #
 #########################################################################
 PRODUCT_COPY_FILES += \
-    device/khadas/common/alarm/alarm_blacklist.txt:/system/etc/alarm_blacklist.txt \
-    device/khadas/common/alarm/alarm_whitelist.txt:/system/etc/alarm_whitelist.txt
+    device/amlogic/common/alarm/alarm_blacklist.txt:/system/etc/alarm_blacklist.txt \
+    device/amlogic/common/alarm/alarm_whitelist.txt:/system/etc/alarm_whitelist.txt
 
 #########################################################################
 #
@@ -277,22 +234,9 @@ PRODUCT_PACKAGES += \
 	tee_storage_benchmark_ta \
 	tee_concurrent_ta \
 	tee_concurrent_large_ta
+
 ifeq ($(TARGET_USE_HW_KEYMASTER),true)
 PRODUCT_PACKAGES += \
 	keystore.amlogic
 endif
-endif
-
-#########################################################################
-#
-#                                     OTA PROPERTY
-#
-#########################################################################
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.product.firmware=00601001 \
-    ro.product.otaupdateurl=http://khadas.com:8008/otaupdate/update
-ifeq ($(BUILD_WITH_CHINA_CONFIG), true)
-PRODUCT_PROPERTY_OVERRIDES += \
-	persist.sys.language=zh \
-	persist.sys.country=CN
 endif

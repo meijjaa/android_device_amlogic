@@ -13,6 +13,3 @@
 # limitations under the License.
 
 LOCAL_PATH := $(call my-dir)
-
-include $(LOCAL_PATH)/Kernel.mk
-include device/khadas/common/factory.mk
