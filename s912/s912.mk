@@ -38,7 +38,7 @@ $(call inherit-product, device/amlogic/s912/device_s912.mk)
 
 # OpenGapps
 GAPPS_VARIANT := pico
-$(call inherit-product,vendor/google/build/opengapps-packages.mk)
+$(call inherit-product,vendor/opengapps/build/opengapps-packages.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += \
         sys.fb.bits=32 \
