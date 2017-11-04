@@ -91,6 +91,12 @@ USE_E2FSPROGS := true
 #    androidboot.firstboot=0 jtag=apao \
 #    mac=D0:76:58:06:C3:53 androidboot.mac=D0:76:58:06:C3:53
 
+BOARD_AML_VENDOR_PATH := $(ANDROID_BUILD_TOP)/vendor/amlogic
+BOARD_AML_LIBAUDIO_PATH := $(ANDROID_BUILD_TOP)/hardware/amlogic/libaudio
+AMAVUTILS_PATH := $(ANDROID_BUILD_TOP)/hardware/amlogic/media/amavutils
+
+AMLOGIC_FRAMEWORKS_AV_CONFIG_MK := frameworks/av/amlogic/config.mk
+
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_CONFIG := meson64_defconfig
@@ -115,7 +121,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 
-RECOVERY_VARIANT := twrp
+#RECOVERY_VARIANT := twrp
 
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 TARGET_RECOVERY_FORCE_PIXEL_FORMAT := "RGB_565"
