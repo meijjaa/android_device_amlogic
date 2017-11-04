@@ -16,10 +16,12 @@ allow tvserver audio_device:chr_file  { read write open ioctl };
 allow tvserver video_device:chr_file  { read write open ioctl getattr };
 allow tvserver dvb_video_device:chr_file  { read write open ioctl getattr };
 allow tvserver dvb_device:chr_file { read write open ioctl };
+allow tvserver vbi_device:chr_file { read write open ioctl };
 allow tvserver uio_device:chr_file rw_file_perms;
 allow tvserver block_device:dir search;
 allow tvserver input_device:dir search;
 allow tvserver input_device:chr_file { read write open ioctl };
+allow tvserver amvecm_device:chr_file { read write open ioctl };
 allow tvserver sysfs:file { read write open ioctl getattr };
 allow tvserver sysfs_xbmc:file { open read write getattr };
 allow tvserver property_socket:sock_file write;
@@ -54,9 +56,9 @@ allow tvserver avin_device:chr_file  { read write open };
 allow tvserver hdmirx0_device:chr_file  { ioctl read write open };
 allow tvserver amvideo_device:chr_file  { read write open };
 
-allow tvserver param_tv_device:dir  { search read write open add_name remove_name rmdir };
-allow tvserver param_tv_device:file { create open read write setattr getattr lock unlink };
-allow param_tv_device labeledfs:filesystem { associate };
+allow tvserver param_tv_file:dir  { search read write open add_name remove_name rmdir };
+allow tvserver param_tv_file:file { create open read write setattr getattr lock unlink };
+allow param_tv_file labeledfs:filesystem { associate };
 
 allow tvserver param_block_device:blk_file { getattr read write open };
 allow tvserver cri_block_device:blk_file { getattr read write open };
@@ -82,3 +84,5 @@ allow tvserver proc:file { read write open ioctl getattr };
 get_prop(tvserver, tv_prop)
 allow tvserver tv_prop:property_service set;
 allow tvserver tv_prop:file { read open getattr};
+
+allow tvserver mediactl_video_device:chr_file {read write open ioctl};

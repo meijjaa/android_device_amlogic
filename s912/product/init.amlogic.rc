@@ -40,7 +40,8 @@ on init
     confirm_formated_ext ext4 /dev/block/tee /tee 1024 1024
 
 on post-fs
-    #start logcatk
+    start logcatk
+    start console
 
 on post-fs-data
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -396,7 +397,7 @@ service fuse_loop /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/loop /storage
 service watchdogd /sbin/watchdogd 10 20
     class core
     disabled
-#    seclabel u:r:watchdogd:s0
+    seclabel u:r:watchdogd:s0
 
 service dhcpcd_eth0 /system/bin/dhcpcd -ABKLG
     class main
@@ -436,27 +437,27 @@ on property:ro.debuggable=1
 service remotecfg /system/bin/remotecfg /system/etc/remote.conf
     class main
     oneshot
-#    seclabel u:r:remotecfg:s0
+    seclabel u:r:remotecfg:s0
 
 service usbpm /system/bin/usbtestpm
     class main
     user system
     group system
-#    seclabel u:r:usbpm:s0
+    seclabel u:r:usbpm:s0
     disabled
 
 service imageserver /system/bin/imageserver
     class main
     user root
     group system
-#    seclabel u:r:imageserver:s0
+    seclabel u:r:imageserver:s0
 
 service instaboot /system/bin/instabootserver
     class core
     disabled
     user root
     group root
-#    seclabel u:r:instaboot:s0
+    seclabel u:r:instaboot:s0
 
 on property:config.disable_instaboot=false
     start instaboot
@@ -482,12 +483,14 @@ service ddrtest /system/bin/ddrtest.sh
    group root
    oneshot
 
-service logcatk /system/bin/logcat -f /dev/kmsg
-   disabled
-
 # logcat offline log
-service logcat /system/bin/logcat -b system -b events -b main -b crash -K -n 10 -v threadtime -f /data/log/logcat.log -r 1000 -M
-   class main
-   user log
-   group log
-#   seclabel u:r:logcat:s0
+service aml_logcat /system/bin/aml_logcat -b system -b events -b main -b crash -n 2 -r 5000 -v threadtime -f /data/log/logcat.log
+    class main
+    user root
+    group system
+    ioprio idle 7
+    disabled
+    seclabel u:r:aml_logcat:s0
+
+on property:ro.debuggable=1
+   start aml_logcat

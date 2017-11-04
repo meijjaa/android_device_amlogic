@@ -3,6 +3,10 @@ allow init self:capability { sys_module };
 domain_trans(init, system_control_exec, system_control)
 domain_auto_trans(init, system_control_exec, system_server)
 
+#allow dv_config service
+domain_trans(init, dv_config_exec, dv_config)
+domain_auto_trans(init, dv_config_exec, dv_config)
+
 #allow init imageserver_service:service_manager add;
 domain_trans(init, imageserver_exec, imageserver)
 
@@ -20,6 +24,9 @@ domain_auto_trans(init, tvserver_exec, tvserver)
 domain_trans(init, hdmi_cec_exec, hdmi_cec)
 domain_auto_trans(init, hdmi_cec_exec, hdmi_cec)
 
+domain_trans(init, accelerateboot_exec, accelerateboot)
+domain_auto_trans(init, accelerateboot_exec, accelerateboot)
+
 domain_trans(init, make_ext4fs_exec, make_ext4fs)
 
 domain_trans(init, hdcp_tx22_exec, hdcp_tx22)
@@ -30,7 +37,7 @@ domain_trans(init, usbpm_exec, usbpm)
 domain_auto_trans(init, usbpm_exec, usbpm)
 
 allow init property_socket:sock_file write;
-allow param_tv_device rootfs:filesystem { associate };
+allow param_tv_file rootfs:filesystem { associate };
 
 allow init vfat:dir rw_dir_perms;
 allow init vfat:file create_file_perms;

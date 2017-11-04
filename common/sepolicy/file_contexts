@@ -2,9 +2,15 @@
 /dev/mali0          u:object_r:gpu_device:s0
 /dev/amaudio_.*     u:object_r:audio_device:s0
 /dev/amstream_.*    u:object_r:video_device:s0
+/dev/media*         u:object_r:video_device:s0
+/dev/media.*        u:object_r:mediactl_video_device:s0
+media.*             u:object_r:mediactl_video_device:s0
+/dev/vfm            u:object_r:mediactl_video_device:s0
+/dev/amsubtitle     u:object_r:mediactl_video_device:s0
 #for dvb open dev
 /dev/amstream_mpts  u:object_r:dvb_video_device:s0
 /dev/amvideo   			u:object_r:dvb_video_device:s0
+/dev/ionvideo                          u:object_r:dvb_video_device:s0
 /dev/amstream_userdata   			u:object_r:dvb_video_device:s0
 
 /dev/amv.*          u:object_r:video_device:s0
@@ -44,6 +50,8 @@
 
 /dev/dvb0.*         u:object_r:dvb_device:s0
 
+/dev/vbi         u:object_r:vbi_device:s0
+
 /dev/dvb.*          u:object_r:video_device:s0
 
 /dev/esm            u:object_r:hdcptx_device:s0
@@ -57,7 +65,7 @@
 
 /dev/amvideo_poll   u:object_r:amvideo_device:s0
 
-/param(/.*)?        u:object_r:param_tv_device:s0
+/param(/.*)?        u:object_r:param_tv_file:s0
 
 /dev/block/param    u:object_r:param_block_device:s0
 /dev/block/cri_data u:object_r:cri_block_device:s0
@@ -119,6 +127,8 @@
 
 /system/bin/tvserver    u:object_r:tvserver_exec:s0
 
+/system/bin/dv_config    u:object_r:dv_config_exec:s0
+
 /dev/tee0               u:object_r:drm_device:s0
 /dev/teepriv0           u:object_r:drm_device:s0
 /dev/opteearmtz00       u:object_r:drm_device:s0
@@ -140,6 +150,16 @@
 /sys/class/audiodsp/audio_samesource    u:object_r:sysfs_audio_samesource:s0
 /sys/class/amhdmitx/amhdmitx0/aud_cap   u:object_r:sysfs_audio_cap:s0
 /sys/devices/virtual/amhdmitx/amhdmitx0/aud_cap u:object_r:sysfs_audio_cap:s0
+/sys/devices/meson-fb.*/graphics/fb1/free_scale     u:object_r:sysfs_fb1_free_scale:s0
+/sys/devices/meson-fb.*/graphics/fb1/blank     u:object_r:sysfs_fb1_blank:s0
+/sys/devices/meson-fb.*/graphics/fb0/blank     u:object_r:sysfs_fb0_blank:s0
+/sys/class/video/file_name  u:object_r:sysfs_video_file_name:s0
 
 /dev/sw_sync           u:object_r:sw_sync_device:s0
 /dev/ge2d              u:object_r:ge2d_device:s0
+/dev/amvecm            u:object_r:amvecm_device:s0
+/dev/display           u:object_r:display_device:s0
+
+/system/bin/accelerateboot u:object_r:accelerateboot_exec:s0
+/data/accelboot(/.*)?      u:object_r:accel_data_file:s0
+/cache/accelboot(/.*)?      u:object_r:accel_data_file:s0

@@ -21,11 +21,26 @@ allow system_server bcmdl_prop:property_service set;
 allow system_server media_prop:property_service set;
 
 
+allow system_server debugfs:dir { getattr read open };
+allow system_server debugfs:file r_file_perms;
+
 allow system_server system_app:fifo_file { ioctl read write getattr };
 allow system_server uhid_device:chr_file { ioctl write open read };
 get_prop(system_server, media_prop)
 
 #allow system_server to access dvb_device
+allow system_server mediactl_video_device:chr_file {read write open ioctl};
 allow system_server dvb_device:chr_file { read write open getattr };
 allow system_server dvb_video_device:chr_file rw_file_perms;
-allow system_server param_tv_device:dir { search };
+allow system_server vbi_device:chr_file { read write open getattr };
+allow system_server param_tv_file:dir { search };
+
+#allow system_server to access env_device
+#allow system_server env_device:blk_file { getattr read write open };
+
+# Ask debuggerd to dump backtraces for native stacks of interest.
+allow system_server {
+   tvserver
+   system_control
+   hdmi_cec
+}:debuggerd dump_backtrace;
