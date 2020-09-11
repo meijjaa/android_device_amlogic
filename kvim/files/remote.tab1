@@ -1,5 +1,5 @@
 custom_name = amlogic-remote-1
-custom_code = 0xfb04
+custom_code = 0x7f80
 release_delay = 80
 
 key_begin

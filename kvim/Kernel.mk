@@ -18,8 +18,8 @@ $(INSTALLED_KERNEL_TARGET): $(TARGET_PREBUILT_KERNEL) | $(ACP)
 
 else
 
-KERNEL_DEVICETREE := kvim
-KERNEL_DEFCONFIG := kvims_defconfig
+KERNEL_DEVICETREE := gxl_p212_2g
+KERNEL_DEFCONFIG := gxl_multitouch_defconfig
 KERNEL_ARCH := arm64
 
 KERNEL_ROOTDIR := common
@@ -41,7 +41,8 @@ BOARD_VENDOR_KERNEL_MODULES     += $(DEFAULT_WIFI_KERNEL_MODULES)
 
 WIFI_OUT  := $(TARGET_OUT_INTERMEDIATES)/hardware/wifi
 
-PREFIX_CROSS_COMPILE=/opt/gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+PREFIX_CROSS_COMPILE=/opt/buildroot_toolchain_gcc_linux-x86_aarch64_gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+#gcc-linaro-6.3.1-2017.02-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-
 
 KERNEL_KO_OUT := $(PRODUCT_OUT)/obj/lib_vendor
 

@@ -47,7 +47,7 @@ PRODUCT_BRAND := Khadas
 PRODUCT_MODEL := VIM
 PRODUCT_MANUFACTURER := Khadas
 
-PRODUCT_TYPE := mbox
+PRODUCT_TYPE := tablet
 
 #BOARD_OLD_PARTITION := true
 
@@ -295,29 +295,6 @@ PRODUCT_LOCALES := en_US en_AU en_IN fr_FR it_IT es_ES et_EE de_DE nl_NL cs_CZ p
   vi_VN tl_PH ar_EG fa_IR th_TH sw_TZ ms_MY af_ZA zu_ZA am_ET hi_IN en_XA ar_XB fr_CA km_KH \
   lo_LA ne_NP si_LK mn_MN hy_AM az_AZ ka_GE my_MM mr_IN ml_IN is_IS mk_MK ky_KG eu_ES gl_ES \
   bn_BD ta_IN kn_IN te_IN uz_UZ ur_PK kk_KZ
-
-#################################################################################
-#
-#                                                PPPOE
-#
-#################################################################################
-ifneq ($(TARGET_BUILD_GOOGLE_ATV), true)
-BUILD_WITH_PPPOE := true
-endif
-
-ifeq ($(BUILD_WITH_PPPOE),true)
-PRODUCT_PACKAGES += \
-    PPPoE \
-    libpppoejni \
-    libpppoe \
-    pppoe_wrapper \
-    pppoe \
-    droidlogic.frameworks.pppoe \
-    droidlogic.external.pppoe \
-    droidlogic.software.pppoe.xml
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.platform.has.pppoe=true
-endif
 
 #################################################################################
 #

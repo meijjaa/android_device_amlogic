@@ -14,6 +14,8 @@
 # limitations under the License.
 #
 
+#GAPPS_VARIANT := pico
+
 ifneq ($(BOARD_USES_RECOVERY_AS_BOOT), true)
 PRODUCT_COPY_FILES += device/khadas/kvim/product/init.amlogic.rc:root/init.amlogic.rc
 
@@ -40,8 +42,6 @@ PRODUCT_COPY_FILES += \
     device/khadas/kvim/files/mesondisplay.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/mesondisplay.cfg \
     device/khadas/kvim/files/remote.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/remote.cfg \
     device/khadas/kvim/files/remote.tab1:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab1 \
-    device/khadas/kvim/files/remote.tab2:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab2 \
-    device/khadas/kvim/files/remote.tab3:$(TARGET_COPY_OUT_VENDOR)/etc/remote.tab3 \
     device/khadas/kvim/manifest.xml:$(TARGET_COPY_OUT_VENDOR)/manifest.xml
 
 PRODUCT_COPY_FILES += \
@@ -52,8 +52,6 @@ PRODUCT_COPY_FILES += \
     device/khadas/kvim/recovery/remotecfg:recovery/root/sbin/remotecfg \
     device/khadas/kvim/files/remote.cfg:recovery/root/etc/remote.cfg \
     device/khadas/kvim/files/remote.tab1:recovery/root/etc/remote.tab1 \
-    device/khadas/kvim/files/remote.tab2:recovery/root/etc/remote.tab2 \
-    device/khadas/kvim/files/remote.tab3:recovery/root/etc/remote.tab3 \
     device/khadas/kvim/recovery/sh:recovery/root/sbin/sh
 
 # remote IME config file
@@ -63,7 +61,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_AAPT_CONFIG := xlarge hdpi xhdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
-PRODUCT_CHARACTERISTICS := mbx,nosdcard
+PRODUCT_CHARACTERISTICS := tablet,nosdcard
 
 DEVICE_PACKAGE_OVERLAYS := \
     device/khadas/kvim/overlay
@@ -77,3 +75,5 @@ $(call inherit-product, frameworks/native/build/tablet-10in-xhdpi-2048-dalvik-he
 # set default USB configuration
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
+
+#$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
